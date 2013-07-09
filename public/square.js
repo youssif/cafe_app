@@ -21,9 +21,20 @@ $(document).ready(function() {
 //when the checkout button is clicked, we need to post 
   $(".button").click(function(event){
   	event.preventDefault();
-  	$.post('/shop', total_cost, function(responsetext) {
-		$('#order_form').html("<h2>" + responsetext + "<h2>");
-  	});
+  	$.ajax({
+  		url:'/shop',
+  		data: total_cost,
+  		type: "POST",
+  		success: function(responsetext) {
+		$('#order_form').html("<h2>Thank you for your order!<h2>");
+  		},
+  		error: function(xhr,status){
+  		$('#order_form').html("<h2>Sorry, there was an error sending your order to the server, no pun intended.<h2>");
+  		}	
+  	})
+  // 	$.post('/shop', total_cost, function(responsetext) {
+		// $('#order_form').html("<h2>" + responsetext + "<h2>");
+  // 	});
 
   	// $.post(shop, info to send, what is a function to respond)
 
